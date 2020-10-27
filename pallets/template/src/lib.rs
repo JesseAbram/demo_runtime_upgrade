@@ -118,29 +118,29 @@ decl_module! {
 		// 	}
 		// }
 		fn on_runtime_upgrade() -> Weight {
-			// debug::info!("storage poorly updated");
-			  mod deprecated {
-				use crate::Trait;
-				use frame_support::{decl_module, decl_storage};
-				use sp_std::prelude::*;
+			debug::info!("storage poorly updated");
+			//   mod deprecated {
+			// 	use crate::Trait;
+			// 	use frame_support::{decl_module, decl_storage};
+			// 	use sp_std::prelude::*;
 			
-				decl_storage! {
-					trait Store for Module<T: Trait> as TemplateModule {
-						pub Something get(fn something): Option<u32>;
-					}
-				}
-				decl_module! {
-					pub struct Module<T: Trait> for enum Call where origin: T::Origin { }
-				}
-			}
-			if PalletVersion::get() == StorageVersion::V1_u32 {
-				debug::info!("storage updated");
-				let something = deprecated::Something::get();
-				Something::put(SomeStruct { sth_else: true, something: something.unwrap_or(0) });
-				PalletVersion::put(StorageVersion::V2_SomeStruct);
-			} else {
-				debug::info!("storage not updated");
-			}
+			// 	decl_storage! {
+			// 		trait Store for Module<T: Trait> as TemplateModule {
+			// 			pub Something get(fn something): Option<u32>;
+			// 		}
+			// 	}
+			// 	decl_module! {
+			// 		pub struct Module<T: Trait> for enum Call where origin: T::Origin { }
+			// 	}
+			// }
+			// if PalletVersion::get() == StorageVersion::V1_u32 {
+			// 	debug::info!("storage updated");
+			// 	let something = deprecated::Something::get();
+			// 	Something::put(SomeStruct { sth_else: true, something: something.unwrap_or(0) });
+			// 	PalletVersion::put(StorageVersion::V2_SomeStruct);
+			// } else {
+			// 	debug::info!("storage not updated");
+			// }
 			
 			0
 		}
